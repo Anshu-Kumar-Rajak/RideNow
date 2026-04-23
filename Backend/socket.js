@@ -7,7 +7,7 @@ let io;
 export function initializeSocket(server) {
     io = new Server(server, {
         cors: {
-            origin: '*',
+            origin: process.env.FRONTEND_URL || 'http://localhost:5173',
             methods: [ 'GET', 'POST' ]
         }
     });
@@ -30,13 +30,13 @@ export function initializeSocket(server) {
         socket.on('update-location-captain', async (data) => {
             const { userId, location } = data;
 
-            if (!location || !location.ltd || !location.lng) {
+            if (!location || !location.lat || !location.lng) {
                 return socket.emit('error', { message: 'Invalid location data' });
             }
 
             await CaptainModel.findByIdAndUpdate(userId, {
                 location: {
-                    ltd: location.ltd,
+                    lat: location.lat,
                     lng: location.lng
                 }
             });

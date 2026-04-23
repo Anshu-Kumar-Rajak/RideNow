@@ -49,8 +49,7 @@ const authCaptain = asyncHandler(async (req, res, next) => {
         next()
     } catch (err) {
         console.log(err);
-
-        res.status(401).json(next(err));
+        return res.status(401).json({ message: 'Unauthorized' });
     }
 });
 

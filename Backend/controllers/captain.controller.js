@@ -51,7 +51,7 @@ const registerCaptain = asyncHandler(async (req, res, next) => {
   res.status(201).json(new ApiResponse(201, "Captain registered successfully", { captain, token }));
 });
 
-const loginCaptain = async (req, res, next) => {
+const loginCaptain = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -75,22 +75,22 @@ const loginCaptain = async (req, res, next) => {
 
   res.cookie("token", token);
 
-  res.status(200).json({ token, captain });
-};
+  res.status(200).json(new ApiResponse(200, "Login successful", { captain, token }));
+});
 
-const getCaptainProfile = async (req, res, next) => {
-  res.status(200).json({ captain: req.captain });
-};
+const getCaptainProfile = asyncHandler(async (req, res, next) => {
+  res.status(200).json(new ApiResponse(200, "Captain profile retrieved successfully", { captain: req.captain }));
+});
 
-const logoutCaptain = async (req, res, next) => {
+const logoutCaptain = asyncHandler(async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   await BlacklistToken.create({ token });
 
   res.clearCookie("token");
 
-  res.status(200).json({ message: "Logout successfully" });
-};
+  res.status(200).json(new ApiResponse(200, "Logout successful", {}));
+});
 
 
 export { registerCaptain, loginCaptain, getCaptainProfile, logoutCaptain };

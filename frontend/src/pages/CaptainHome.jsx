@@ -34,7 +34,7 @@ const CaptainHome = () => {
                     socket.emit('update-location-captain', {
                         userId: captain._id,
                         location: {
-                            ltd: position.coords.latitude,
+                            lat: position.coords.latitude,
                             lng: position.coords.longitude
                         }
                     })
@@ -45,24 +45,21 @@ const CaptainHome = () => {
         const locationInterval = setInterval(updateLocation, 10000)
         updateLocation()
 
-        // return () => clearInterval(locationInterval)
-    }, [])
+        socket.on('new-ride', (data) => {
+            setRide(data)
+            setRidePopupPanel(true)
+        })
 
-    socket.on('new-ride', (data) => {
-
-        setRide(data)
-        setRidePopupPanel(true)
-
-    })
+        return () => {
+            clearInterval(locationInterval)
+            socket.off('new-ride')
+        }
+    }, [socket, captain._id])
 
     async function confirmRide() {
 
         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
-
             rideId: ride._id,
-            captainId: captain._id,
-
-
         }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

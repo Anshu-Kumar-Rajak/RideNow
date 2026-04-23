@@ -4,8 +4,7 @@ import { ApiError } from "../utility/ApiError.js";
 import { ApiResponse } from "../utility/ApiResponse.js";
 import { createUser } from "../services/user.service.js";
 import { validationResult } from "express-validator";
-
-// const blackListTokenModel = require("../models/blackListToken.model");
+import { BlacklistToken } from "../models/blacklistToken.model.js";
 
 const registerUser = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
