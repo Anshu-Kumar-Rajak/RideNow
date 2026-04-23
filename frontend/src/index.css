@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans antialiased;
+  }
+
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  /* Desktop optimizations */
+  @media (min-width: 1024px) {
+    body {
+      @apply text-base;
+    }
+  }
+}
+
+@layer components {
+  /* Buttons with responsive sizing */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 md:py-3 lg:py-3.5 px-4 md:px-6 lg:px-8 rounded-lg lg:rounded-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 md:py-3 lg:py-3.5 px-4 md:px-6 lg:px-8 rounded-lg lg:rounded-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg shadow-md hover:shadow-lg;
+  }
+
+  .card {
+    @apply bg-white rounded-lg lg:rounded-xl shadow-md hover:shadow-lg transition-shadow p-4 md:p-6 lg:p-8;
+  }
+
+  .input-field {
+    @apply w-full px-3 md:px-4 lg:px-5 py-2.5 md:py-3 lg:py-4 border-2 border-gray-200 rounded-lg lg:rounded-xl focus:border-blue-600 focus:outline-none bg-white transition-colors text-sm md:text-base lg:text-lg;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900;
+  }
+
+  /* Responsive text sizes */
+  .text-responsive-xs {
+    @apply text-xs sm:text-xs md:text-sm lg:text-base;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm md:text-base lg:text-lg;
+  }
+
+  .text-responsive-base {
+    @apply text-base md:text-lg lg:text-xl;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+
+  /* Padding utilities for responsive design */
+  .px-responsive {
+    @apply px-3 sm:px-4 md:px-6 lg:px-8;
+  }
+
+  .py-responsive {
+    @apply py-3 sm:py-4 md:py-6 lg:py-8;
+  }
+
+  .p-responsive {
+    @apply p-3 sm:p-4 md:p-6 lg:p-8;
+  }
+
+  /* Desktop card styling */
+  .desktop-card {
+    @apply bg-white rounded-2xl shadow-lg p-8 max-w-2xl;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  .slide-in-up {
+    animation: slideInUp 0.6s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceInScale 0.4s ease-out;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Responsive grid for desktop layouts */
+@media (min-width: 1024px) {
+  .grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+input,
+select,
+textarea {
+  @apply transition-all duration-200;
+}
+
+/* Focus states for accessibility */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring-2 ring-blue-400 ring-opacity-50;
+}
+
+/* Desktop navbar enhancement */
+@media (min-width: 1024px) {
+  nav {
+    @apply shadow-md;
+  }
+}
